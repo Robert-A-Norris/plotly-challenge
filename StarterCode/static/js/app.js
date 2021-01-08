@@ -8,13 +8,33 @@ d3.json("../data/samples.json").then((data) =>{
 });
 
 function plot(sample){
-    // //Bar Chart 
-
-// var sample_values = jsondata.samples.slice(0,10).reverse;
-// var otu_id = jsondata.samples.otu_ids.slice(0,10)
+// //Bar Chart 
+// var trace = {
+//     x: sample_values,
+//     y: otu_ids, 
+//     text: otu_labels
+// };
 
 
 // Bubble Chart
+
+var trace = {
+    x: jsondata.otu_ids,
+    y: jsondata.sample_values,
+    text: jsondata.otu_labels,
+    marker:{
+        color: jsondata.otu_ids,
+        size:jsondata.sample_values
+    }
+};
+var trace = [trace];
+var layout = {
+    title: "OTUs",
+    height: 450,
+    width: 1000
+
+};
+Plotly.newPlot("bubble", trace, layout);
 
 
 console.log(`plot: ${sample}`)
@@ -45,10 +65,7 @@ optionChanged(names[0])
 function optionChanged(new_id){
 plot(new_id)
 metadata(new_id)
-}
-
-
-
+};
 
 
 
